@@ -1,0 +1,50 @@
+<div
+class="py-5 text-center text-white h-100 align-items-center d-flex"
+style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), rgba(0, 0, 0, .75)),
+url(https://publi-click.herokuapp.com/images/fondo.jpg);
+ background-position: center center, center center;  background-size: cover, cover;  background-repeat: repeat, repeat;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="mx-auto col-lg-8 col-md-10">
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username">Nombre de usuario</label>
+                <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Username is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">Ingresar</button>
+                <a routerLink="/registro" class="btn btn-link">Registrarse</a>
+            </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <form formGroup="formLogin">
+        <legend>Login</legend>
+        <div class="form-field">
+            <label>Email:</label>
+            <input name="email" formControlName="email">
+        </div>
+        <div class="form-field">
+            <label>Password:</label>
+            <input name="password" formControlName="password"
+                   type="password">
+        </div>
+    <div class="form-buttons">
+        <button class="button button-primary"
+                (click)="login()">Login</button>
+    </div>
+</form> -->

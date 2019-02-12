@@ -1,0 +1,258 @@
+<div
+  fxLayout="column"
+  class="mat-elevation-z8"
+>
+  <div
+    fxLayout="column"
+    class="mat-elevation-z8 padding"
+  >
+    <div
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayout="row"
+      class="perfil-user"
+    >
+      <div
+        fxLayout="column"
+        class="padding"
+      >
+      <p>
+        <img
+            *ngIf="cuerpo.data.foto !== 'chico.png'"
+            class="perfil"
+            [src]="cuerpo.data.foto"
+            alt="none"
+            width="100px"
+            height="120px"
+        >
+        <img
+            *ngIf="cuerpo.data.foto === 'chico.png'"
+            class="perfil"
+            src="{{global.url}}images/{{cuerpo.data.foto}}"
+            alt="none"
+            width="100px"
+            height="120px"
+        >
+    </p>
+    <p>
+        <i class="fas fa-chess-queen"></i>
+       {{user.titleNivel}}
+    </p>
+        <div
+          class="image-upload"
+          style="overflow: hidden;"
+        >
+            <input
+              type="file"
+              [(ngModel)]="img"
+              (blur)="datafiles($event)"
+              accept="image/x-png,image/jpeg"
+            />
+            <button
+              mat-mini-fab color="primary"
+            >
+              <i class="fas fa-cloud-upload-alt fa-1x"></i>
+            </button>
+        </div>
+      </div>
+    </div>
+    <mat-form-field
+        fxFlex
+        class="example-full-width"
+      >
+        <input
+            matInput
+            placeholder="Codigo de Referencia"
+            value="{{this.url}}registro/{{cuerpo.data.username}}"
+        >
+        </mat-form-field>
+    <div
+      fxLayout.xs="column"
+      fxLayout="row"
+    >
+        <mat-form-field
+            fxFlex
+            class="example-full-width"
+        >
+            <input
+                matInput
+                placeholder="User Name"
+                disabled = false
+                [(ngModel)]="cuerpo.data.username"
+                (blur)="cuerpo.btn.edit(cuerpo, 'username')"
+            >
+        </mat-form-field>
+        <mat-form-field
+            fxFlex
+            class="example-full-width"
+        >
+            <input
+                matInput
+                placeholder="nombre"
+                [(ngModel)]="cuerpo.data.name"
+                (blur)="cuerpo.btn.edit(cuerpo, 'name')"
+            >
+        </mat-form-field>
+    </div>
+    <div
+      fxLayout.xs="column"
+      fxLayout="row"
+    >
+        <mat-form-field
+            fxFlex
+            class="example-full-width"
+        >
+            <input
+                matInput
+                placeholder="Apellido"
+                [(ngModel)]="cuerpo.data.lastname"
+                (blur)="cuerpo.btn.edit(cuerpo, 'lastname')"
+            >
+        </mat-form-field>
+        <mat-form-field
+            fxFlex
+            class="example-full-width"
+        >
+            <!-- <input
+                matInput
+                placeholder="Sexo"
+                [(ngModel)]="cuerpo.data.sexo"
+                (blur)="cuerpo.btn.edit(cuerpo, 'sexo')"
+            > -->
+            <select
+              required
+              matNativeControl
+              placeholder="Sexo"
+              [(ngModel)]="cuerpo.data.sexo"
+              (blur)="cuerpo.btn.edit(cuerpo, 'sexo')"
+            >
+              <option value="masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+              <option value="sin-expesificar">Sin Expesificar</option>
+            </select>
+        </mat-form-field>
+    </div>
+    <div
+      fxLayout.xs="column"
+      fxLayout="row"
+    >
+        <mat-form-field
+            fxFlex
+            class="example-full-width"
+        >
+            <!-- <input
+                matInput
+                placeholder="Tipo de Documento"
+                [(ngModel)]="cuerpo.data.tipdoc"
+                (blur)="cuerpo.btn.edit(cuerpo, 'tipdoc')"
+            > -->
+            <select
+              required
+              matNativeControl
+              placeholder="Tipo de Documento"
+              [(ngModel)]="cuerpo.data.tipdoc"
+              (blur)="cuerpo.btn.edit(cuerpo, 'tipdoc')"
+            >
+              <option value="cc">CC</option>
+              <option value="cx">CX</option>
+              <option value="sin-expesificar">Sin Expesificar</option>
+            </select>
+        </mat-form-field>
+        <mat-form-field
+            fxFlex
+            class="example-full-width"
+        >
+            <input
+                matInput
+                placeholder="Numero de Documento"
+                [(ngModel)]="cuerpo.data.documento"
+                (blur)="cuerpo.btn.edit(cuerpo, 'documento')"
+            >
+        </mat-form-field>
+        <mat-form-field
+            fxFlex
+            class="example-full-width"
+        >
+            <input
+                matInput
+                placeholder="Numero de Celular"
+                [(ngModel)]="cuerpo.data.celular"
+                (blur)="cuerpo.btn.edit(cuerpo, 'celular')"
+            >
+        </mat-form-field>
+    </div>
+    <div
+      fxLayout.xs="column"
+      fxLayout="row"
+    >
+      <mat-form-field
+          fxFlex
+          class="example-full-width"
+      >
+          <input
+              matInput
+              maxlength="20"
+              minlength="6"
+              type="password"
+              placeholder="Contraseña Anterior"
+              [(ngModel)]="cuerpo.data.passwordAfter"
+          >
+      </mat-form-field>
+      <mat-form-field
+          fxFlex
+          class="example-full-width"
+      >
+          <input
+              matInput
+              maxlength="20"
+              minlength="6"
+              type="password"
+              placeholder="Contraseña"
+              [(ngModel)]="cuerpo.data.password1"
+          >
+      </mat-form-field>
+      <mat-form-field
+          fxFlex
+          class="example-full-width"
+      >
+          <input
+              matInput
+              maxlength="20"
+              minlength="6"
+              type="password"
+              placeholder="Verificar Contraseña"
+              [(ngModel)]="cuerpo.data.passwordverified"
+              (blur)="cuerpo.btn.edit(cuerpo, 'password')"
+          >
+      </mat-form-field>
+    </div>
+    <div
+      fxLayout.xs="column"
+      fxLayout="row"
+    >
+      <mat-form-field
+          fxFlex
+          class="example-full-width"
+      >
+          <input
+              matInput
+              placeholder="Patrocinador"
+              disabled = true
+              [(ngModel)]="cuerpo.data.cabeza.username"
+          >
+      </mat-form-field>
+      <mat-form-field
+          fxFlex
+          class="example-full-width"
+      >
+          <input
+              matInput
+              placeholder="Email"
+              disabled = true
+              [(ngModel)]="cuerpo.data.email"
+              (blur)="cuerpo.btn.edit(cuerpo, 'email')"
+          >
+      </mat-form-field>
+    </div>
+  </div>
+</div>

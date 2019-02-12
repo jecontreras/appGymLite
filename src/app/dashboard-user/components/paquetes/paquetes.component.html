@@ -1,0 +1,42 @@
+<div
+  fxFlex
+  fxLayout="column"
+  class="container"
+>
+  <mat-card class="example-card" *ngFor="let item of paquetes; index as i">
+    <form #form (submit)='form.submit()' name='my_form' method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+      <input name="merchantId"    type="hidden"  value="{{item.datosPayu.merchantId}}"   >
+      <input name="accountId"     type="hidden"  value="{{item.datosPayu.accountId}}" >
+      <input name="description"   type="hidden"  value="{{item.datosPayu.description}}">
+      <input name="referenceCode" type="hidden"  value="{{item.datosPayu.referenceCode}}" >
+      <input name="amount"        type="hidden"  value="{{item.datosPayu.amount}}"   >
+      <input name="tax"           type="hidden"  value="{{item.datosPayu.tax}}"  >
+      <input name="taxReturnBase" type="hidden"  value="{{item.datosPayu.taxReturnBase}}" >
+      <input name="currency"      type="hidden"  value="{{item.datosPayu.currency}}" >
+      <input name="signature"     type="hidden"  value="{{item.datosPayu.signature}}"  >
+      <input name="test"          type="hidden"  value="{{item.datosPayu.test}}" >
+      <input name="buyerEmail"    type="hidden"  value="{{item.datosPayu.buyerEmail}}" >
+      <input name="responseUrl"    type="hidden"  value="{{item.datosPayu.responseUrl}}" >
+      <input name="confirmationUrl"    type="hidden"  value="{{item.datosPayu.confirmationUrl}}" >
+
+    <mat-card-header>
+      <mat-card-title>{{item.title}}</mat-card-title>
+      <mat-card-subtitle>{{item.subtitle}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+        {{item.description}}
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="warn"
+      matTooltip="Comprar"
+      name="Submit"  type="submit"
+      >
+      <i class="fas fa-shopping-cart"></i>
+      Adquirir </button>
+      {{item.valor | currency: 0 : "$"}}
+    </mat-card-actions>
+  </form>
+  </mat-card>
+</div>

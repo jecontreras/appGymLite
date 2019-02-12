@@ -1,0 +1,243 @@
+<div class="main-content mat-elevation-z8">
+  <div class="container-fluid">
+    <div
+      fxLayout="row"
+    >
+      <mat-form-field
+          *ngIf="disabled"
+          fxFlex
+          class="example-full-width"
+      >
+          <input
+              matInput
+              placeholder="Nombre"
+              disabled = false
+              [(ngModel)]="searchtext"
+          >
+      </mat-form-field>
+      <button
+        *ngIf="disabled"
+        mat-mini-fab color="primary"
+        (click)="get(true)"
+      >
+        <i class="fas fa-search fa-1x"></i>
+      </button>
+      <button
+        *ngIf="disabled"
+        mat-mini-fab color="accent"
+        (click)="new()"
+      >
+        <i class="fas fa-plus-circle fa-1x"></i>
+      </button>
+      <div
+        fxFlex
+        *ngIf="!disabled"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+        >
+          Crear User
+      </div>
+      <button
+        *ngIf="!disabled"
+        mat-mini-fab color="accent"
+        (click)="new(false)"
+      >
+        <i class="fas fa-sign-out-alt fa-1x"></i>
+      </button>
+    </div>
+    <table
+      class="table table-hover table-sm"
+      *ngIf="disabled"
+    >
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Documento</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Sexo</th>
+          <th scope="col">Celular</th>
+          <th scope="col">Email</th>
+          <th scope="col">Direccion</th>
+          <!-- <th scope="col">Create</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of list"
+          (click)="new(item)"
+        >
+          <th scope="row">{{ item.documento }}</th>
+          <td>{{ item.name }}</td>
+          <td>{{ item.lastname }}</td>
+          <td>{{ item.sexo }}</td>
+          <td>{{ item.celular }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.direccion }}</td>
+          <!-- <td>{{ item.createdAt }}</td> -->
+        </tr>
+      </tbody>
+    </table>
+    <div
+      *ngIf="!disabled"
+      class="p"
+      fxLayout="column"
+    >
+        <div
+          fxLayout="column"
+          class="mat-elevation-z8"
+        >
+        <div
+          fxLayout.xs="column"
+          fxLayout="row"
+        >
+          <mat-form-field
+              fxFlex
+              class="example-full-width p"
+          >
+              <input
+                  matInput
+                  placeholder="nombre"
+                  [(ngModel)]="cuerpo.data.name"
+                  (blur)="edit(cuerpo, 'name')"
+              >
+          </mat-form-field>
+          <mat-form-field
+              fxFlex
+              class="example-full-width p"
+          >
+              <input
+                  matInput
+                  placeholder="Apellido"
+                  [(ngModel)]="cuerpo.data.lastname"
+                  (blur)="edit(cuerpo, 'lastname')"
+              >
+          </mat-form-field>
+        </div>
+        <div
+          fxLayout.xs="column"
+          fxLayout="row"
+        >
+            <mat-form-field
+                fxFlex
+                class="example-full-width p"
+            >
+                <select
+                  required
+                  matNativeControl
+                  placeholder="Sexo"
+                  [(ngModel)]="cuerpo.data.sexo"
+                  (blur)="edit(cuerpo, 'sexo')"
+                >
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                  <option value="sin-expesificar">Sin Expesificar</option>
+                </select>
+            </mat-form-field>
+            <mat-form-field
+                fxFlex
+                class="example-full-width p"
+            >
+                <input
+                    matInput
+                    placeholder="Direccion"
+                    [(ngModel)]="cuerpo.data.direccion"
+                    (blur)="edit(cuerpo, 'direccion')"
+                >
+            </mat-form-field>
+            <mat-form-field
+                fxFlex
+                class="example-full-width p"
+            >
+                <select
+                  required
+                  matNativeControl
+                  placeholder="Plan"
+                  [(ngModel)]="cuerpo.data.usuarioplan"
+                  (blur)="edit(cuerpo, 'usuarioplan')"
+                >
+                  <option
+                    [value]="pl.id"
+                    *ngFor="let pl of cuerpo.lisplan"
+                  >
+                    {{ pl.plan }}
+                  </option>
+                </select>
+            </mat-form-field>
+        </div>
+        <div
+          fxLayout.xs="column"
+          fxLayout="row"
+        >
+            <mat-form-field
+                fxFlex
+                class="example-full-width p"
+            >
+                <select
+                  required
+                  matNativeControl
+                  placeholder="Tipo de Documento"
+                  [(ngModel)]="cuerpo.data.tipdoc"
+                  (blur)="edit(cuerpo, 'tipdoc')"
+                >
+                  <option value="cc">CC</option>
+                  <option value="cx">CX</option>
+                  <option value="sin-expesificar">Sin Expesificar</option>
+                </select>
+            </mat-form-field>
+            <mat-form-field
+                fxFlex
+                class="example-full-width p"
+            >
+                <input
+                    matInput
+                    placeholder="Numero de Documento"
+                    [(ngModel)]="cuerpo.data.documento"
+                    (blur)="edit(cuerpo, 'documento')"
+                >
+            </mat-form-field>
+            <mat-form-field
+                fxFlex
+                class="example-full-width p"
+            >
+                <input
+                    matInput
+                    placeholder="Numero de Celular"
+                    [(ngModel)]="cuerpo.data.celular"
+                    (blur)="edit(cuerpo, 'celular')"
+                >
+            </mat-form-field>
+        </div>
+        <div
+          fxLayout.xs="column"
+          fxLayout="row"
+        >
+          <mat-form-field
+              fxFlex
+              class="example-full-width p"
+          >
+              <input
+                  matInput
+                  placeholder="Email"
+                  [(ngModel)]="cuerpo.data.email"
+                  (blur)="edit(cuerpo, 'email')"
+              >
+          </mat-form-field>
+        </div>
+        <div
+          fxLayout="row"
+          class="p"
+        >
+          <div fxFlex>
+
+          </div>
+          <button
+            mat-mini-fab color="accent"
+            (click)="createuser()"
+          >
+            <i class="fas fa-save fa-1x"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

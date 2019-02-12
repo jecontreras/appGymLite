@@ -1,0 +1,176 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div
+      fxLayout="row"
+    >
+      <mat-form-field
+          *ngIf="disabled"
+          fxFlex
+          class="example-full-width"
+      >
+          <input
+              matInput
+              placeholder="Nombre"
+              disabled = false
+              [(ngModel)]="searchtext"
+          >
+      </mat-form-field>
+      <button
+        *ngIf="disabled"
+        mat-mini-fab color="primary"
+        (click)="get(true)"
+      >
+        <i class="fas fa-search fa-1x"></i>
+      </button>
+      <button
+        mat-mini-fab color="primary"
+        aria-label="Registrar Usuario"
+      >
+        <i class="fas fa-plus-circle fa-1x"></i>
+      </button>
+      <button
+        *ngIf="!disabled"
+        mat-mini-fab color="warn"
+        (click)="asistencia(false)"
+      >
+        <i class="fas fa-times-circle fa-1x"></i>
+      </button>
+    </div>
+    <table class="table table-hover table-sm" *ngIf="disabled">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Documento</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Celular</th>
+          <th scope="col">Email</th>
+          <th scope="col">Direccion</th>
+          <th scope="col">Asistencias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of list"
+        >
+          <th scope="row">{{ item.documento }}</th>
+          <td>{{ item.name }}</td>
+          <td>{{ item.celular }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.direccion }}</td>
+          <td>
+            <button
+              *ngIf="!item.check"
+              mat-mini-fab color="primary"
+              (click)="asistencia(item)"
+            >
+              <i class="fas fa-check fa-1x"></i>
+            </button>
+            <button
+              *ngIf="item.check"
+              (click)="asistencia(item)"
+              mat-mini-fab color="warn"
+            >
+              <i class="fas fa-check fa-1x"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      fxLayout="column"
+      *ngIf="!disabled"
+    >
+      <div
+        fxLayout="column"
+      >
+        <div
+          fxLayout="row"
+        >
+          <mat-form-field
+              fxFlex
+              class="example-full-width"
+          >
+              <input
+                  matInput
+                  placeholder="Documento"
+                  disabled = false
+                  [(ngModel)]="data.usuario.documento"
+              >
+          </mat-form-field>
+          <mat-form-field
+              fxFlex
+              class="example-full-width"
+          >
+              <input
+                  matInput
+                  placeholder="Nombre"
+                  disabled = false
+                  [(ngModel)]="data.usuario.name"
+              >
+          </mat-form-field>
+        </div>
+        <div
+          fxLayout="row"
+        >
+          <mat-form-field
+            fxFlex
+          >
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [(ngModel)]="data.fecha"
+              placeholder="Fecha"
+            >
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            >
+            </mat-datepicker-toggle>
+            <mat-datepicker
+              #picker
+            >
+            </mat-datepicker>
+          </mat-form-field>
+          <mat-form-field
+              fxFlex
+              class="example-full-width"
+          >
+              <input
+                  matInput
+                  type="number"
+                  placeholder="Valor"
+                  disabled = false
+                  [(ngModel)]="data.valor"
+              >
+          </mat-form-field>
+        </div>
+        <div
+          fxLayout="row"
+        >
+          <mat-form-field
+            fxFlex
+            class="example-full-width"
+          >
+            <textarea
+              matInput
+              placeholder="Descripcion"
+              [(ngModel)]="data.descripcion"
+            >
+            </textarea>
+          </mat-form-field>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
+          <button
+            (click)="guardarasis()"
+            mat-mini-fab color="primary"
+            aria-label="Guardar"
+          >
+            <i class="fas fa-save fa-1x"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

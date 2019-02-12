@@ -1,0 +1,265 @@
+<div
+  fxLayout="column"
+  class="container"
+>
+  <div>
+    <mat-toolbar
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      color="primary"
+    >
+      <h4
+        class="example-h4"
+      >
+        Tablero
+      </h4>
+    </mat-toolbar>
+    <div
+      fxLayout="column"
+      class="m"
+    >
+      <!-- <div
+        fxFlex
+        fxLayout="row"
+      >
+        <div
+          fxFlex
+        >
+          <label>Puntos Totales: </label>
+          <span>{{ totalPuntos }}</span>
+        </div>
+      </div> -->
+    <mat-tab-group
+      animationDuration="1000ms"
+      mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4"
+    >
+      <mat-tab
+        label="Grafica y Tablas"
+      >
+        <mat-grid-list
+          cols="2"
+          rowHeight="170px"
+          gutterSize="5px"
+        >
+          <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2"
+            colspan="1" class="mi-tile-contents-top"
+          >
+            <mat-grid-tile-header
+              style="background: #3f51b5;"
+            >
+              Puntos
+            </mat-grid-tile-header>
+            <canvas
+              id="canvas"
+              class="canvasgraf"
+            >{{ dataPuntos }}</canvas>
+          </mat-grid-tile>
+          <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2"
+            colspan="1" class="mi-tile-contents-top"
+          >
+            <mat-grid-tile-header
+              style="background: #3f51b5;"
+            >
+              Puntos de Referidos
+            </mat-grid-tile-header>
+            <canvas id="canvas2" class="canvasgraf">{{ dataPuntosRef }}</canvas>
+          </mat-grid-tile>
+          <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2"
+            colspan="1" class="mi-tile-contents-top"
+          >
+            <mat-grid-tile-header
+              style="background: #3f51b5;"
+            >
+              Referidos Cantidad
+            </mat-grid-tile-header>
+            <canvas id="canvas3" class="canvasgraf">{{ dataCantidadRef }}</canvas>
+          </mat-grid-tile>
+          <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2"
+            colspan="1" class="mi-tile-contents-top"
+          >
+            <mat-grid-tile-header
+              style="background: #3f51b5;"
+            >
+              Paquetes
+            </mat-grid-tile-header>
+            <canvas id="canvas4" class="canvasgraf">{{ dataPaquetes }}</canvas>
+          </mat-grid-tile>
+          <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2"
+            colspan="1" class="mi-tile-contents-top"
+          >
+            <mat-grid-tile-header
+              style="background: #3f51b5;"
+            >
+              Retirado de Puntos
+            </mat-grid-tile-header>
+            <canvas id="canvas" class="canvasgraf">{{ chart }}</canvas>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-tab>
+      <mat-tab
+        label="Resumen General"
+      >
+        <div
+          fxLayout="column"
+          class="marginTop"
+        >
+          <div>
+            <div
+              fxLayout="row"
+            >
+              <div
+                fxFlex
+                class="colorsub"
+              >
+                <span>Mi Publicacion</span>
+              </div>
+            </div>
+            <div
+              class="m"
+              fxLayout="row"
+            >
+              <span fxFlex>Disponible:</span>
+              <label fxFlex="10">{{ general.publicacion.dispoble || 0 }}</label>
+            </div>
+            <div
+              class="m"
+              fxLayout="row"
+            >
+              <span fxFlex>Utilizado:</span>
+              <label fxFlex="10">{{ general.publicacion.utilizado || 0 }}</label>
+            </div>
+          </div>
+          <div>
+            <div
+              fxLayout="row"
+            >
+              <div
+                fxFlex
+                class="colorsub"
+              >
+                <span>Mis Recompensas</span>
+              </div>
+            </div>
+            <div
+              class="m"
+              fxLayout="row"
+            >
+              <span fxFlex>Cantidad de Puntos:</span>
+              <label fxFlex="10">{{ general.recompensa.disponible || 0 }}</label>
+            </div>
+            <div
+              class="m"
+              fxLayout="row"
+            >
+              <span fxFlex>Puntos Retirado:</span>
+              <label fxFlex="10">{{ general.recompensa.retirado || 0 }}</label>
+            </div>
+            <div
+              class="m"
+              fxLayout="row"
+            >
+              <span fxFlex>Puntos Disponible:</span>
+              <label fxFlex="10">{{ general.recompensa.utilizado || 0 }}</label>
+            </div>
+          </div>
+          <div>
+            <div
+              fxLayout="row"
+            >
+              <div
+                fxFlex
+                class="colorsub"
+              >
+                <span>Mis Referidos</span>
+              </div>
+            </div>
+            <div
+              class="m"
+              fxLayout="row"
+            >
+              <span fxFlex>Activos:</span>
+              <label fxFlex="10">{{ general.referidos.activos || 0 }}</label>
+            </div>
+            <div
+              class="m"
+              fxLayout="row"
+            >
+              <span fxFlex>Inactivos:</span>
+              <label fxFlex="10">{{ general.referidos.inactivos || 0 }}</label>
+            </div>
+            <div>
+              <div
+                fxLayout="row"
+              >
+                <div
+                  fxFlex
+                  class="colorsub"
+                >
+                  <span>Mis Click</span>
+                </div>
+              </div>
+              <div
+                class="m"
+                fxLayout="row"
+              >
+                <span fxFlex>Diario:</span>
+                <label fxFlex="10">{{ general.click.diario || 0 }}</label>
+              </div>
+              <div
+                class="m"
+                fxLayout="row"
+              >
+                <span fxFlex>Total:</span>
+                <label fxFlex="10">{{ general.click.total || 0 }}</label>
+              </div>
+            </div>
+            <div>
+              <div
+                fxLayout="row"
+              >
+                <div
+                  fxFlex
+                  class="colorsub"
+                >
+                  <span>Mis Paquetes</span>
+                </div>
+              </div>
+              <div
+                class="m"
+                fxLayout="row"
+              >
+                <span fxFlex>Paquete Basico:</span>
+                <label fxFlex="10">{{ general.paquete.basico || 0 }}</label>
+              </div>
+              <div
+                class="m"
+                fxLayout="row"
+              >
+                <span fxFlex>Paquete Emprendedor:</span>
+                <label fxFlex="10">{{ general.paquete.emprendedor || 0 }}</label>
+              </div>
+              <div
+                class="m"
+                fxLayout="row"
+              >
+                <span fxFlex>Paquete Lider:</span>
+                <label fxFlex="10">{{ general.paquete.lider || 0 }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    </div>
+  </div>
+</div>
